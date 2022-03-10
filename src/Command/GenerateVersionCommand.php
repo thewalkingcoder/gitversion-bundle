@@ -34,7 +34,7 @@ class GenerateVersionCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $version = $this->versionProvider->generate();
+        $version = $this->versionProvider->fromGit();
         $this->writer->write($version);
 
 
