@@ -10,9 +10,9 @@ use Twc\GitversionBundle\Domain\Version;
 
 class VersionProvider implements VersionProviderInterface
 {
-    private string $defaultVersion;
-    private string $baseDir;
-    private string $fileName;
+    private $defaultVersion;
+    private $baseDir;
+    private $fileName;
 
     public function __construct(
         string $defaultVersion,
@@ -26,7 +26,7 @@ class VersionProvider implements VersionProviderInterface
 
     public function fromGit(): Version
     {
-        $process = Process::fromShellCommandline('git describe --tag');
+        $process = Process::fromShellCommandline($this->getCommand());
         $process->setTimeout(0);
         $process->run();
 
@@ -37,14 +37,28 @@ class VersionProvider implements VersionProviderInterface
         return new Version($process->getOutput());
     }
 
+    protected function getCommand(): string
+    {
+        return 'git describe --tag';
+    }
+
     public function get(): Version
     {
-        if (file_exists($this->getPathFile()) === false) {
+        if ($this->isFileNotExist()) {
             return new Version($this->getDefaultVersion());
         }
-        $content = file_get_contents($this->getPathFile());
 
-        return new Version($content);
+        return new Version($this->getContent());
+    }
+
+    protected function isFileNotExist(): bool
+    {
+        return file_exists($this->getPathFile()) === false;
+    }
+
+    protected function getContent(): string
+    {
+        return file_get_contents($this->getPathFile());
     }
 
     protected function getPathFile(): string

@@ -9,7 +9,7 @@ use Twc\GitversionBundle\Domain\Version;
 
 class VersionWriter implements VersionWriterInterface
 {
-    private string $baseDir;
+    private $baseDir;
     public const FILE_VERSION_NAME = 'VERSION';
 
     public function __construct(string $baseDir)

@@ -6,7 +6,7 @@ namespace Twc\GitversionBundle\Domain;
 
 class Version
 {
-    private string $name;
+    private $name;
 
     public function __construct(string $name)
     {
