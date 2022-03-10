@@ -1,0 +1,25 @@
+services:
+  Twc\GitversionBundle\Provider\VersionProvider:
+    arguments:
+      - "%twc_gitversion.default_version%"
+      - '%kernel.project_dir%'
+      - "%twc_gitversion.file_name%"
+
+  Twc\GitversionBundle\Services\VersionWriter:
+    arguments:
+      - '%kernel.project_dir%'
+
+  Twc\GitversionBundle\Command\GenerateVersionCommand:
+    arguments:
+      - '@Twc\GitversionBundle\Provider\VersionProvider'
+      - '@Twc\GitversionBundle\Services\VersionWriter'
+    tags:
+      - { name: 'console.command', command: 'twc:generate:version' }
+
+  Twc\GitversionBundle\Domain\Interfaces\VersionProviderInterface: '@Twc\GitversionBundle\Provider\VersionProvider'
+
+  Twc\GitversionBundle\Twig\VersionExtension:
+    arguments:
+      - '@Twc\GitversionBundle\Provider\VersionProvider'
+    tags:
+      - { name: 'twig.extension' }

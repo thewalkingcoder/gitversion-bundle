@@ -1,0 +1,21 @@
+{
+  "name": "twc/gitversion-bundle",
+  "description": "Extract last git tag to manage app versioning",
+  "type": "symfony-bundle",
+  "license": "MIT",
+  "require": {
+    "php": ">=7.2.5",
+    "symfony/console": "^5.4|^6.0",
+    "symfony/process": "^5.4|^6.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "Twc\\GitversionBundle\\": "src/",
+      "Twc\\GitversionBundle\\Tests\\": "tests/"
+
+    }
+  }
+}
