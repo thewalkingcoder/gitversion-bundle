@@ -15,8 +15,8 @@ class GenerateVersionCommand extends Command
     protected static $defaultName = 'twc:generate:version';
     protected static $defaultDescription = "Generate app version related to last git tag.";
 
-    private VersionProviderInterface $versionProvider;
-    private VersionWriterInterface $writer;
+    private $versionProvider;
+    private $writer;
 
     public function __construct(
         VersionProviderInterface $versionProvider,
