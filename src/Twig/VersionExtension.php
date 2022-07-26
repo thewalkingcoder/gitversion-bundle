@@ -10,7 +10,7 @@ use Twig\Extension\GlobalsInterface;
 
 class VersionExtension extends AbstractExtension implements GlobalsInterface
 {
-    private VersionProviderInterface $provider;
+    private $provider;
 
     public function __construct(VersionProviderInterface $provider)
     {
